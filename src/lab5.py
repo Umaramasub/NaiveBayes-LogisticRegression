@@ -1,6 +1,7 @@
 import pickle
 import os
 from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
 def read_pickle(filename):
     """Reads a pickle file with name and path of filename, returns the object
     :param filename: Name of the pickle file
@@ -43,6 +44,13 @@ def spilt_data(data, test_size=0.25, random_state=1):
     :return: tuple with the train data and test data"""
     X_train, X_test, y_train, y_test = train_test_split(data[:,0:2],data[:,2])
     return X_train, X_test, y_train, y_test
+
+def naive_beyes(X_train, X_test, y_train, y_test):
+    clf_model= GaussianNB()
+    train_model=clf_model.fit(X_train,X_test)
+    prediction=clf_model.predict(y_train)
+
+
 
 
 
