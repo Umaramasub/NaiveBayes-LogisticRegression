@@ -1,5 +1,6 @@
 import pickle
 import os
+from sklearn.model_selection import train_test_split
 def read_pickle(filename):
     """Reads a pickle file with name and path of filename, returns the object
     :param filename: Name of the pickle file
@@ -31,10 +32,18 @@ def data(list):
     """Reads a pickle file and returns the array containing the sample data
     :param list: contains a list of all the paths to the sample files
     :return: array containing all the samples for each data file"""
-    data = []
+    sample_data = []
     for file in list:
-        data.append(read_pickle(file))
-    return data
+        sample_data.append(read_pickle(file))
+    return sample_data
+
+def spilt_data(data, test_size=0.25, random_state=1):
+    """Splits the data into training and testing data and returns a tuple containing the train and the test data
+    :param numpy array: contains the data with the classifier,default the test size to 0.25 and random_state=1
+    :return: tuple with the train data and test data"""
+    X_train, X_test, y_train, y_test = train_test_split(data[:,0:2],data[:,2])
+    return X_train, X_test, y_train, y_test
+
 
 
 if __name__ == '__main__':
