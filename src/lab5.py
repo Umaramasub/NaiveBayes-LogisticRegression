@@ -26,3 +26,8 @@ def get_files(dir_path):
     for file_name in list_filenames:
         result.append(os.path.join(os.path.normpath(dir_path), file_name))
     return result
+
+if __name__ == '__main__':
+    wd = os.getcwd()
+    files=get_files(wd)
+    print files
