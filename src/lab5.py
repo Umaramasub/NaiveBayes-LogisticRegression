@@ -27,6 +27,16 @@ def get_files(dir_path):
         result.append(os.path.join(os.path.normpath(dir_path), file_name))
     return result
 
+def data(list):
+    """Reads a pickle file and returns the array containing the sample data
+    :param list: contains a list of all the paths to the sample files
+    :return: array containing all the samples for each data file"""
+    data = []
+    for file in list:
+        data.append(read_pickle(file))
+    return data
+
+
 if __name__ == '__main__':
     wd = os.getcwd()
     files=get_files(wd)
