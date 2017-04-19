@@ -3,6 +3,8 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import confusion_matrix
+
 def read_pickle(filename):
     """Reads a pickle file with name and path of filename, returns the object
     :param filename: Name of the pickle file
@@ -56,6 +58,23 @@ def linear_reg(X_train, X_test, y_train, y_test):
     train_model=regr.fit(X_train, X_test)
     prediction=regr.predict(y_train)
 
+def sensitivity(true_value,predict_value):
+    """This function takes three parameters, the true value and the predicted value from the classifier.
+    of the test data.The function will return the calculated sensitivity value as a float.
+    :param the true value and the predicted value
+    :return: calculated sensitivity as float"""
+
+    # Create a confusion matrix to get the rates
+    conf_matrix = confusion_matrix(true_value, predict_value)
+
+    # Extract the required values from the matrix
+    true_pos = conf_matrix[1][1]
+    false_neg = conf_matrix[1][0]
+    if true_pos + false_neg == 0:
+        result = 0
+    else:
+        result = float(true_pos) / (true_pos + false_neg)
+    return result
 
 
 
