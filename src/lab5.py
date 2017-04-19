@@ -76,6 +76,24 @@ def sensitivity(true_value,predict_value):
         result = float(true_pos) / (true_pos + false_neg)
     return result
 
+def specificity(true_value,predict_value):
+    """This function takes three parameters, the true value and the predicted value from the classifier.
+    of the test data.The function will return the calculated sensitivity value as a float.
+    :param the true value and the predicted value
+    :return: calculated specificity as float """
+
+    # Create a confusion matrix to get the rates
+    conf_matrix = confusion_matrix(true_value,predict_value)
+    true_neg = conf_matrix[0][0]
+    false_pos = conf_matrix[0][1]
+    if true_neg + false_pos == 0:
+        result = 0
+    else:
+        result = float(true_neg) / (true_neg + false_pos)
+    return result
+
+
+
 
 
 
