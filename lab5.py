@@ -86,3 +86,7 @@ def naive_bayes(X_train, X_test, y_train, y_test):
     }
     return NB_dict
 
+if __name__ == '__main__':
+    wd = os.getcwd()
+    files = get_files(wd)
+    data_files = files[1:6]
