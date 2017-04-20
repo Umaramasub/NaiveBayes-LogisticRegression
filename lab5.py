@@ -86,6 +86,39 @@ def naive_bayes(X_train, X_test, y_train, y_test):
     }
     return NB_dict
 
+def log_reg(X_train, X_test, y_train, y_test):
+    regr = LogisticRegression()
+    train_model = regr.fit(X_train, y_train)
+    y_pred = regr.predict(X_test)
+    f1score = f1_score(y_test, y_pred, average='macro')
+    accuracy = accuracy_score(y_test, y_pred)
+    y_score = train_model.decision_function(X_test)
+    auc = roc_auc_score(y_test, y_score)
+    conf_matrix = confusion_matrix(y_test, y_pred)
+    true_neg = conf_matrix[0][0]
+    false_pos = conf_matrix[0][1]
+    if true_neg + false_pos == 0:
+        spec = 0
+    else:
+        spec = float(true_neg) / (true_neg + false_pos)
+        true_pos = conf_matrix[1][1]
+    false_neg = conf_matrix[1][0]
+    if true_pos + false_neg == 0:
+        sens = 0
+    else:
+        sens = float(true_pos) / (true_pos + false_neg)
+    LR_dict = {
+        'Model': 'LogisticRegression',
+        'Sensitivity': sens,
+        'Specificity': spec,
+        'Accuracy': accuracy,
+        'F1 Score': f1score,
+        'Auc': auc,
+        'Y_test': y_test,
+        'Y_score': y_score
+    }
+    return LR_dict
+
 if __name__ == '__main__':
     wd = os.getcwd()
     files = get_files(wd)
