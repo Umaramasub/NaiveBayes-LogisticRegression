@@ -53,3 +53,36 @@ def spilt_data(data, test_size=0.25, random_state=1):
     X_train, X_test, y_train, y_test = train_test_split(data[:, 0:2], data[:, 2])
     return X_train, X_test, y_train, y_test
 
+def naive_bayes(X_train, X_test, y_train, y_test):
+    clf_model = GaussianNB()
+    train_model = clf_model.fit(X_train, y_train)
+    y_pred = train_model.predict(X_test)
+    f1score = f1_score(y_test, y_pred, average='macro')
+    accuracy = accuracy_score(y_test, y_pred)
+    y_score = train_model.predict_proba(X_test)
+    auc = roc_auc_score(y_test, y_score[:, 1])
+    conf_matrix = confusion_matrix(y_test, y_pred)
+    true_neg = conf_matrix[0][0]
+    false_pos = conf_matrix[0][1]
+    if true_neg + false_pos == 0:
+        spec = 0
+    else:
+        spec = float(true_neg) / (true_neg + false_pos)
+        true_pos = conf_matrix[1][1]
+    false_neg = conf_matrix[1][0]
+    if true_pos + false_neg == 0:
+        sens = 0
+    else:
+        sens = float(true_pos) / (true_pos + false_neg)
+    NB_dict = {
+        'Model': 'Naive Bayes',
+        'Sensitivity': sens,
+        'Specificity': spec,
+        'Accuracy': accuracy,
+        'F1 Score': f1score,
+        'Auc': auc,
+        'Y_test': y_test,
+        'Y_score': y_score[:, 1]
+    }
+    return NB_dict
+
