@@ -161,3 +161,9 @@ if __name__ == '__main__':
     wd = os.getcwd()
     files = get_files(wd)
     data_files = files[1:6]
+    for file in data_files:
+        data = read_pickle(file)
+        X_train, X_test, y_train, y_test = spilt_data(data)
+        dict1 = naive_bayes(X_train, X_test, y_train, y_test)
+        dict2 = log_reg(X_train, X_test, y_train, y_test)
+        plot_roc(dict1, dict2)
