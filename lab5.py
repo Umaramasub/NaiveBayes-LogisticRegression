@@ -9,6 +9,7 @@ from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 from sklearn.metrics import f1_score
 from sklearn.metrics import roc_auc_score
+import sklearn.preprocessing as pp
 
 
 def read_pickle(filename):
@@ -49,11 +50,13 @@ def data(list):
     return sample_data
 
 
-def spilt_data(data, test_size=0.25, random_state=1):
+def spilt_data(data, test_size=0.33, random_state=1):
     """Splits the data into training and testing data and returns a tuple containing the train and the test data
     :param numpy array: contains the data with the classifier,default the test size to 0.25 and random_state=1
     :return: tuple with the train data and test data"""
-    X_train, X_test, y_train, y_test = train_test_split(data[:, 0:2], data[:, 2])
+    scaler_object = pp.StandardScaler()
+    scaled_data = scaler_object.fit_transform(data[:,0:2])
+    X_train, X_test, y_train, y_test = train_test_split(scaled_data[:, 0:2], data[:, 2])
     return X_train, X_test, y_train, y_test
 
 
@@ -124,7 +127,6 @@ def log_reg(X_train, X_test, y_train, y_test):
     }
     return LR_dict
 
-
 def plot_roc(NB_dict, LR_dict):
     fig = plt.figure()
     ax = fig.add_subplot(1, 2, 1)
@@ -161,8 +163,9 @@ if __name__ == '__main__':
     wd = os.getcwd()
     files = get_files(wd)
     data_files = files[1:6]
+    data=[]
     for file in data_files:
-        data = read_pickle(file)
+        data=read_pickle(file)
         X_train, X_test, y_train, y_test = spilt_data(data)
         dict1 = naive_bayes(X_train, X_test, y_train, y_test)
         dict2 = log_reg(X_train, X_test, y_train, y_test)
