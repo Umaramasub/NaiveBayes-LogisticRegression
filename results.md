@@ -5,4 +5,5 @@
 **Example 3**
 ![figure_1_3](https://cloud.githubusercontent.com/assets/20176541/25259533/8a109606-25fb-11e7-8ecb-f83b240c8cd7.png)
 **Example 4**
+![figure_1-4](https://cloud.githubusercontent.com/assets/20176541/25259562/ba664d82-25fb-11e7-9f01-b919798c1c5f.png)
 **Example 5**
