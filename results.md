@@ -7,3 +7,4 @@
 **Example 4**
 ![figure_1-4](https://cloud.githubusercontent.com/assets/20176541/25259562/ba664d82-25fb-11e7-9f01-b919798c1c5f.png)
 **Example 5**
+![figure_1-5](https://cloud.githubusercontent.com/assets/20176541/25259594/ed697bf0-25fb-11e7-902a-b22f2431050f.png)
