@@ -63,6 +63,7 @@ def spilt_data(data, test_size=0.33, random_state=1):
     X_train, X_test, y_train, y_test = train_test_split(scaled_data[:, 0:2], data[:, 2])
     return X_train, X_test, y_train, y_test
 
+
 def naive_bayes(X_train, X_test, y_train, y_test):
     """Given the training and test data, it trains the data using Naive Bayes model, the model is then tested using the testing data.Based
     on the results of the testing, the performance metrics of the model is calculated.
@@ -198,7 +199,7 @@ def plot_roc(NB_dict, LR_dict):
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.legend(loc=4,fontsize='xx-large')
+    plt.legend(loc=4, fontsize='xx-large')
     plt.title('Naive Bayes Model')
 
     # Create the axis for the second subplot
@@ -216,7 +217,7 @@ def plot_roc(NB_dict, LR_dict):
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     plt.title('Logistic Regression Model')
-    plt.legend(loc=4,fontsize='xx-large')
+    plt.legend(loc=4, fontsize='xx-large')
     plt.show()
 
 
